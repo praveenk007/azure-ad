@@ -1,0 +1,35 @@
+server:
+  port: 8081
+  servlet:
+    session:
+      cookie:
+        secure: true
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:selfsigned.p12
+    key-store-password: stagingturtlemintcom
+    key-alias: staging.turtlemint.com
+
+logging.level.org.springframework.web: DEBUG
+
+spring:
+  security:
+    require-ssl: true
+    oauth2:
+      client:
+        provider:
+          azure:
+            user-info-uri: https://graph.microsoft.com/oidc/userinfo
+            issuer: https://login.microsoftonline.com/nikildturtlemint.onmicrosoft.com/v2.0
+            authorization-uri: https://login.microsoftonline.com/nikildturtlemint.onmicrosoft.com/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/nikildturtlemint.onmicrosoft.com/oauth2/v2.0/token
+            jwk-set-uri: https://login.microsoftonline.com/common/discovery/keys
+        registration:
+          azure:
+            client-id: 94821a6e-fcf3-4ad4-be7a-0f3d54eb880c
+            client-secret: e6dp2eN1_i5AC-Rc.FMFsia.z]VlGa_-
+            scope: https://graph.microsoft.com/User.Read.All
+            redirect-uri: https://localhost:8081/login
+            authentication-scheme: header
+            client-authentication-scheme: form
+            authorization-grant-type: authorization_code
